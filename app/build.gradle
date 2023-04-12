@@ -1,12 +1,9 @@
-buildscript {
-    dependencies {
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.38.1'
-    }
-}
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -50,6 +47,9 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
@@ -87,7 +87,8 @@ dependencies {
 
 
     //hilt
-    implementation 'com.google.dagger:hilt-android:2.39.1'
+    implementation("com.google.dagger:hilt-android:2.45")
+    kapt("com.google.dagger:hilt-android-compiler:2.45")
 
     //vm
     implementation group: 'androidx.lifecycle', name:'lifecycle-viewmodel-ktx', version: '2.0.0-alpha1'
