@@ -4,9 +4,11 @@ import com.example.moviesseal.login.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
+@ViewModelScoped
+class AuthRepositoryImpl (
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
 
