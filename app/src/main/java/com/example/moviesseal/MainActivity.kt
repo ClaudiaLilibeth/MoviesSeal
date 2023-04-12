@@ -8,16 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.ViewModelProvider
-import com.example.moviesseal.login.LoginView
-import com.example.moviesseal.login.LoginViewModel
+import com.example.moviesseal.login.AuthViewModel
+import com.example.moviesseal.login.view.RegisterView
 import com.example.moviesseal.ui.theme.MoviesSealTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val viewModel by viewModels<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +26,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   LoginView(onLoginClick = { email, password ->
-                       viewModel.signIn(email, password) }, onSignUpClick = {})
+                   RegisterView(
+                       applicationContext,
+                       viewModel
+                   )
                 }
             }
         }
