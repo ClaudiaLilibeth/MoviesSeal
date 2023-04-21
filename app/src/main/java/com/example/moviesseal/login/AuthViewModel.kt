@@ -1,6 +1,5 @@
 package com.example.moviesseal.login
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.moviesseal.login.data.AuthRepository
 import com.example.moviesseal.login.data.Resource
@@ -16,6 +15,7 @@ class AuthViewModel @Inject constructor(
     private val repository: AuthRepository,
 ) : ViewModel() {
 
+    //#firebase 4 flows to use firebase functions inside vm
     private val _loginFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<Resource<FirebaseUser>?> = _loginFlow
 

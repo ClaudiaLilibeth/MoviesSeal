@@ -1,8 +1,8 @@
 package com.example.moviesseal.login.data
 
-import com.example.moviesseal.login.data.Resource
 import com.google.firebase.auth.FirebaseUser
 
+//#firebase 2 Firebase events as interface
 interface AuthRepository {
     val currentUser: FirebaseUser?
     suspend fun login(email: String, password: String): Resource<FirebaseUser>

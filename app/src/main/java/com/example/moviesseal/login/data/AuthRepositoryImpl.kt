@@ -7,6 +7,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
+//#firebase 3 events as suspend functions
 @ViewModelScoped
 class AuthRepositoryImpl (
     private val firebaseAuth: FirebaseAuth

@@ -17,7 +17,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.moviesseal.login.AuthViewModel
 import com.example.moviesseal.login.data.Resource
-import io.grpc.Context
 
 @Composable
 fun RegisterView(
@@ -30,6 +29,7 @@ fun RegisterView(
     val name = rememberSaveable { mutableStateOf("") }
     val passwordVisible = rememberSaveable { mutableStateOf(false) }
 
+//#firebase 5 view uses flows from vm
     val loginFlow = loginViewModel.loginFlow.collectAsState()
 
     Column(

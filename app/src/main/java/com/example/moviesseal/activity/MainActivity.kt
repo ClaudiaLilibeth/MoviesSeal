@@ -1,4 +1,4 @@
-package com.example.moviesseal
+package com.example.moviesseal.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
