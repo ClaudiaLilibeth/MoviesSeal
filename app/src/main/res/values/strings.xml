@@ -2,6 +2,17 @@
     <string name="app_name">MoviesSeal</string>
     <string name="title_activity_movies">MoviesActivity</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo</string>
+    <string name="contrasenia">Contraseña</string>
+    <string name="ya_tienes_cuenta">¿Ya tienes una cuenta? Inicia sesión</string>
+    <string name="registrate">¿No tienes una cuenta? Regístrate</string>
+    <string name="inicio_sesion_correcta">INICIO DE SESIÓN CORRECTA</string>
+    <string name="registro_correcto">REGISTRO CORRECTO</string>
+    <string name="correo_ya_registrado">CORREO ya está registrado</string>
+    <string name="correo_mal_escrito">FORMATO de correo incorrecto</string>
 
 
 </resources>

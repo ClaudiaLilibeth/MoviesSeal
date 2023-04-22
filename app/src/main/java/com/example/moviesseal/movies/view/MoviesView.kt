@@ -1,7 +1,6 @@
 package com.example.moviesseal.movies.view
 
 import android.content.Intent
-import android.provider.AlarmClock
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
@@ -9,8 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.moviesseal.activity.MainActivity
-import com.example.moviesseal.commons.CONSTANTS
+import com.example.moviesseal.login.views.MainActivity
+import com.example.moviesseal.login.utils.CONSTANTS
 
 @Composable
 fun MoviesView (userName: String){

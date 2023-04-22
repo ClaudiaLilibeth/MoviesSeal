@@ -1,9 +1,10 @@
 package com.example.moviesseal.login.view
 
 import android.content.Intent
-import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -11,28 +12,36 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import com.example.moviesseal.commons.CONSTANTS
+import com.example.moviesseal.R
+import com.example.moviesseal.login.utils.CONSTANTS
 import com.example.moviesseal.login.AuthViewModel
 import com.example.moviesseal.login.data.Resource
 import com.example.moviesseal.movies.view.MoviesActivity
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RegisterView(
     registerViewModel: AuthViewModel
 ) {
     val context = LocalContext.current
     val signUp = rememberSaveable { mutableStateOf(true) }
+    val keyboardController = LocalSoftwareKeyboardController.current
     val email = rememberSaveable { mutableStateOf("") }
     val password = rememberSaveable { mutableStateOf("") }
     val name = rememberSaveable { mutableStateOf("") }
     val passwordVisible = rememberSaveable { mutableStateOf(false) }
+
 //#firebase 5 view uses flows from vm
     val loginFlow = registerViewModel.loginFlow.collectAsState()
     val signUpFlow = registerViewModel.signupFlow.collectAsState()
@@ -49,8 +58,13 @@ fun RegisterView(
             //Nombre
             OutlinedTextField(
                 value = name.value,
-                onValueChange = { name.value = it },
-                label = { Text("Nombre") },
+                onValueChange = { if(it.length<= CONSTANTS.MAX_CHAR) name.value = it },
+                label = { Text(stringResource(R.string.nombre)) },
+                singleLine = true,
+                maxLines = 1,
+                keyboardActions = KeyboardActions(
+                    onDone = {keyboardController?.hide()}
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp)
@@ -60,8 +74,11 @@ fun RegisterView(
         // Email
         OutlinedTextField(
             value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Correo") },
+            onValueChange = { if(it.length<= CONSTANTS.MAX_MAIL_CHAR) email.value = it },
+            label = { Text(stringResource(R.string.correo)) },
+            singleLine = true,
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
@@ -70,15 +87,19 @@ fun RegisterView(
         // Password
         OutlinedTextField(
             value = password.value,
-            onValueChange = { password.value = it },
-            label = { Text("Contraseña") },
+            onValueChange = { if(it.length<= CONSTANTS.MAX_CHAR) password.value = it },
+            label = { Text(stringResource(R.string.contrasenia)) },
             visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,  imeAction = ImeAction.Done),
+            singleLine = true,
+            maxLines = 1,
+            keyboardActions = KeyboardActions(
+                onDone = {keyboardController?.hide()}
+            ),
             trailingIcon = {
                 if (passwordVisible.value)
                 Icon(painterResource(id = com.google.android.material.R.drawable.design_ic_visibility), "visibility on")
                 else Icon(painterResource(id = com.google.android.material.R.drawable.design_ic_visibility_off), "visivility off")
-
                 IconButton(onClick = {passwordVisible.value = !passwordVisible.value}){
                 }
             },
@@ -99,7 +120,7 @@ fun RegisterView(
                 .fillMaxWidth()
                 .padding(vertical = 16.dp)
         ) {
-            Text( if(signUp.value)"Registrarse" else "Iniciar sesión")
+            Text( if(signUp.value) stringResource(R.string.registrarse) else stringResource(R.string.iniciar_sesion))
         }
 
         // Log in - iniciar sesiòn
@@ -112,21 +133,22 @@ fun RegisterView(
                 .padding(vertical = 16.dp)
         ) {
             Text(
-                if(signUp.value) "¿Ya tienes una cuenta? Inicia sesión"
-            else "¿No tienes una cuenta? Regístrate"
+                if(signUp.value) stringResource(R.string.ya_tienes_cuenta)
+            else stringResource(R.string.registrate)
             )
         }
 
         loginFlow.value?.let {
             when (it) {
                 is Resource.Error -> {
-                    Toast.makeText(context, "ERROR EN INICIO DE SESION.", Toast.LENGTH_SHORT).show()
+                   Log.e("ERROR", "ERROR EN INICIO DE SESIÒN")
+                    registerViewModel.logout()
                 }
                 is Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context, "INICIO DE SESIÓN CORRECTA", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, stringResource(R.string.inicio_sesion_correcta), Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, MoviesActivity::class.java).apply {
                         putExtra(CONSTANTS.NAME, registerViewModel.currentUser?.displayName)
                     }
@@ -138,13 +160,21 @@ fun RegisterView(
         signUpFlow.value?.let {
             when (it) {
                 is Resource.Error -> {
-                    Toast.makeText(context, "ERROR EN REGISTRO.", Toast.LENGTH_SHORT).show()
+                    Log.e("ERROR", "ERROR EN REGISTRO")
+                    val message = it.message?: ""
+                    if(message.contains(CONSTANTS.MAIL_ALREADY_IN_USE)){
+                        Toast.makeText(context, stringResource(R.string.correo_ya_registrado), Toast.LENGTH_SHORT).show()
+                    }
+                    else if (message.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
+                        Toast.makeText(context, stringResource(R.string.correo_mal_escrito), Toast.LENGTH_SHORT).show()
+                    }
+                    registerViewModel.logout()
                 }
                 is Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context, "REGISTRO CORRECTO", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, stringResource(R.string.registro_correcto), Toast.LENGTH_SHORT).show()
                     val intent = Intent(context, MoviesActivity::class.java).apply {
                         putExtra(CONSTANTS.NAME, registerViewModel.currentUser?.displayName)
                     }

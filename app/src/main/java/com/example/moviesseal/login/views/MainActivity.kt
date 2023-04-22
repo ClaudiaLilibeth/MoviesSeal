@@ -1,4 +1,4 @@
-package com.example.moviesseal.activity
+package com.example.moviesseal.login.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.example.moviesseal.commons.CONSTANTS
+import com.example.moviesseal.login.utils.CONSTANTS
 import com.example.moviesseal.login.AuthViewModel
 import com.example.moviesseal.login.view.RegisterView
 import com.example.moviesseal.movies.view.MoviesActivity

@@ -1,5 +1,6 @@
 package com.example.moviesseal.login.data
 
+import com.example.moviesseal.login.utils.CONSTANTS
 import com.example.moviesseal.login.utils.await
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -34,8 +35,14 @@ class AuthRepositoryImpl (
             result.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
             return Resource.Success(result.user!!)
         } catch (e: Exception) {
+            if(e.message!!.contains(CONSTANTS.MAIL_ALREADY_IN_USE)) {
+                return Resource.Error(message = CONSTANTS.MAIL_ALREADY_IN_USE)
+            }
+            else if(e.message!!.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
+                return  Resource.Error(message = CONSTANTS.MAIL_BAD_FORMAT)
+            }
             e.printStackTrace()
-            Resource.Error()
+            return  Resource.Error()
         }
     }
 
