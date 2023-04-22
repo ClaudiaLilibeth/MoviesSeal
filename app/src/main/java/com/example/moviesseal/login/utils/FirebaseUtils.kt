@@ -1,6 +1,5 @@
 package com.example.moviesseal.login.utils
 
-import com.example.moviesseal.login.data.Resource
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine

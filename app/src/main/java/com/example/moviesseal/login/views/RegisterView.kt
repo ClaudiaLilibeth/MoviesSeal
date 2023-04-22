@@ -1,4 +1,4 @@
-package com.example.moviesseal.login.view
+package com.example.moviesseal.login.views
 
 import android.content.Intent
 import android.util.Log

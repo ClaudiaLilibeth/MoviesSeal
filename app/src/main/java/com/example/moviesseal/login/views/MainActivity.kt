@@ -11,7 +11,6 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.moviesseal.login.utils.CONSTANTS
 import com.example.moviesseal.login.AuthViewModel
-import com.example.moviesseal.login.view.RegisterView
 import com.example.moviesseal.movies.view.MoviesActivity
 import com.example.moviesseal.ui.theme.MoviesSealTheme
 import dagger.hilt.android.AndroidEntryPoint
