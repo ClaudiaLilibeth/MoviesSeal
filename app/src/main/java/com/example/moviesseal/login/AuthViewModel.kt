@@ -33,14 +33,14 @@ class AuthViewModel @Inject constructor(
 
     //iniciar sesiòn
     fun loginUser(email: String, password: String) = viewModelScope.launch {
-        _loginFlow.value = Resource.Loading
+        _loginFlow.value = Resource.Loading(true)
         val result = repository.login(email, password)
         _loginFlow.value = result
     }
 
     //registrarse
     fun signupUser(name: String, email: String, password: String) = viewModelScope.launch {
-        _signupFlow.value = Resource.Loading
+        _signupFlow.value = Resource.Loading(true)
         val result = repository.signup(name, email, password)
         _signupFlow.value = result
     }

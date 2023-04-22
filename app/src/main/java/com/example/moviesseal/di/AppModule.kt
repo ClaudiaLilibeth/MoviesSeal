@@ -1,4 +1,4 @@
-package com.example.moviesseal.login.di
+package com.example.moviesseal.di
 
 import com.example.moviesseal.login.data.AuthRepository
 import com.example.moviesseal.login.data.AuthRepositoryImpl
