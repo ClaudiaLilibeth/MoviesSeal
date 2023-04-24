@@ -1,0 +1,21 @@
+
+v
+Fapp/src/main/java/com/example/moviesseal/movies/view/ui/theme/Color.kt,e/e/eea81d932deb5a01752e45b7a87d5af5eb92b8b3
+v
+Fapp/src/main/java/com/example/moviesseal/movies/view/ui/theme/Shape.kt,d/f/dfc2daadd1bd42b8a47da19122736636528d68b5
+v
+Fapp/src/main/java/com/example/moviesseal/movies/view/ui/theme/Theme.kt,e/c/ecedd69a6c86e9db89dd7964912931af2addada7
+u
+Eapp/src/main/java/com/example/moviesseal/movies/view/ui/theme/Type.kt,4/a/4a2a4d2f55f6dd9cd74dc720a2964ad702841881
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+o
+?app/src/main/java/com/example/moviesseal/login/AuthViewModel.kt,4/5/45b269f46cf60dbcc46a89ea74f99c958342f814
+t
+Dapp/src/main/java/com/example/moviesseal/login/views/MainActivity.kt,e/3/e3e262641c16d41f95675a546040f27f102070ff
+?
+settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
+r
+Bapp/src/main/java/com/example/moviesseal/movies/utils/Constants.kt,1/9/1913ab3be378c2de5ab3df9fe1309bb4e8a6dbd2
+„
+Tapp/src/main/java/com/example/moviesseal/movies/use_case/GetMoviesTopRatedUseCase.kt,2/7/2719fc08c78a43f1156669b68efbce424d4bcadc

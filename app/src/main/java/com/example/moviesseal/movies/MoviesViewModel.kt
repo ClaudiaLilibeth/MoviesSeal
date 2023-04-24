@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(
     private val moviesLastUseCase: GetMoviesLatestUseCase,
     private val moviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
-    private val moviesTopRatedUseCase: GetMoviesTopRatedUseCase
+    private val moviesTopRatedUseCase: GetMoviesTopRatedUseCase,
 ): ViewModel() {
     private val _moviesNowPlaying = MutableStateFlow(ArrayList<Movie>())
     val moviesNowPlaying: StateFlow<ArrayList<Movie>> get() = _moviesNowPlaying
@@ -26,15 +26,14 @@ class MoviesViewModel @Inject constructor(
     private val _moviesTopRated = MutableStateFlow(ArrayList<Movie>())
     val moviesTopRated: StateFlow<ArrayList<Movie>> get() = _moviesTopRated
 
-    private val _moviesLast = MutableStateFlow(ArrayList<Movie>())
-    val moviesLast: StateFlow<ArrayList<Movie>> get() = _moviesLast
+    private val _moviesLast = MutableStateFlow(Movie())
+    val moviesLast: StateFlow<Movie> get() = _moviesLast
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
             _moviesNowPlaying.value = moviesNowPlayingUseCase().results
             _moviesTopRated.value = moviesTopRatedUseCase().results
-            _moviesLast.value = moviesLastUseCase().results
-
+            _moviesLast.value = moviesLastUseCase()
         }
     }
 }

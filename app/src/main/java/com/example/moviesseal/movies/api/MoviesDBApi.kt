@@ -1,18 +1,19 @@
 package com.example.moviesseal.movies.api
 
+import com.example.moviesseal.movies.models.Movie
 import com.example.moviesseal.movies.models.MoviesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MoviesDBApi {
     @GET("movie/now_playing")
-    fun getMoviesNowPlaying(@Query("page")page:Int): MoviesResponse
+    suspend fun getMoviesNowPlaying(@Query("page")page:Int): MoviesResponse
 
     @GET("movie/latest")
-    fun getMoviesLatest():MoviesResponse
+    suspend fun getMoviesLatest():Movie
 
     @GET("movie/top_rated")
-    fun getMoviesTopRated(@Query("page")page:Int):MoviesResponse
+    suspend fun getMoviesTopRated(@Query("page")page:Int):MoviesResponse
 
 
 }

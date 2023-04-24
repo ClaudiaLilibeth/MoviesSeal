@@ -10,4 +10,3 @@ sealed class Resource<T>(
     class Error<T>(data: T? = null, message: String? = null) : Resource<T>(data, message = message)
     class Loading<T>(loading: Boolean? = null) : Resource<T>(loading = loading)
 }
-
