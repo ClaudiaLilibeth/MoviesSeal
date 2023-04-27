@@ -69,15 +69,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation "androidx.compose.runtime:runtime-livedata:1.2.1"
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.0'
-
    //HILT
     implementation 'com.google.dagger:hilt-android:2.44'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     kapt 'com.google.dagger:hilt-compiler:2.44'
 
     //FIREBASE
@@ -85,17 +80,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
 
+    //RETROFIT
+    implementation 'com.squareup.retrofit2:retrofit:2.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.0'
+
     //NavigationCompose
     def nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
-
-    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
 
 }

@@ -4,7 +4,7 @@
     <string name="title_activity_register">RegisterActivity</string>
     <string name="registrarse">Registrarse</string>
     <string name="iniciar_sesion">Iniciar sesión</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Nombre de usuario</string>
     <string name="correo">Correo</string>
     <string name="contrasenia">Contraseña</string>
     <string name="ya_tienes_cuenta">¿Ya tienes una cuenta? Inicia sesión</string>

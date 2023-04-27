@@ -3,7 +3,9 @@ package com.example.moviesseal.login.views
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -14,8 +16,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -49,19 +53,34 @@ fun RegisterView(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(horizontal = 48.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        Image(painter = painterResource(id = R.drawable.logo_seal),
+            contentDescription = "logo",
+            modifier = Modifier
+                .padding(top = 48.dp, bottom = 24.dp, end = 16.dp)
+                .size(200.dp)
+        )
+        
         if(signUp.value) {
             //Nombre
             OutlinedTextField(
                 value = name.value,
                 onValueChange = { if(it.length<= CONSTANTS.MAX_CHAR) name.value = it },
+                trailingIcon = { Icon(painter = painterResource(id = R.drawable.user), contentDescription = "icon",
+                    tint = colorResource(R.color.gray_soft))},
                 label = { Text(stringResource(R.string.nombre)) },
                 singleLine = true,
                 maxLines = 1,
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedBorderColor = colorResource(id = R.color.fourth_soft),
+                    textColor = colorResource(id = R.color.gray_soft),
+                    focusedBorderColor = colorResource(id = R.color.fourth_soft),
+                    placeholderColor = colorResource(id = R.color.fourth_soft),
+                    focusedLabelColor = colorResource(id = R.color.secondary_soft),
+                    ),
                 keyboardActions = KeyboardActions(
                     onDone = {keyboardController?.hide()}
                 ),
@@ -77,7 +96,16 @@ fun RegisterView(
             onValueChange = { if(it.length<= CONSTANTS.MAX_MAIL_CHAR) email.value = it },
             label = { Text(stringResource(R.string.correo)) },
             singleLine = true,
+            trailingIcon = { Icon(painter = painterResource(id = R.drawable.email), contentDescription = "icon",
+                           tint = colorResource(R.color.gray_soft))},
             maxLines = 1,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = colorResource(id = R.color.fourth_soft),
+                textColor = colorResource(id = R.color.gray_soft),
+                focusedBorderColor = colorResource(id = R.color.fourth_soft),
+                placeholderColor = colorResource(id = R.color.fourth_soft),
+                focusedLabelColor = colorResource(id = R.color.secondary_soft),
+            ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
             modifier = Modifier
                 .fillMaxWidth()
@@ -93,6 +121,13 @@ fun RegisterView(
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,  imeAction = ImeAction.Done),
             singleLine = true,
             maxLines = 1,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = colorResource(id = R.color.fourth_soft),
+                textColor = colorResource(id = R.color.gray_soft),
+                focusedBorderColor = colorResource(id = R.color.fourth_soft),
+                placeholderColor = colorResource(id = R.color.fourth_soft),
+                focusedLabelColor = colorResource(id = R.color.secondary_soft),
+            ),
             keyboardActions = KeyboardActions(
                 onDone = {keyboardController?.hide()}
             ),
@@ -117,8 +152,11 @@ fun RegisterView(
                     registerViewModel.loginUser(email.value, password.value)
                       },
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp)
+                .padding(top = 8.dp),
+            shape = RoundedCornerShape(50),
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = colorResource(id = R.color.secondary_soft),
+                contentColor = Color.White)
         ) {
             Text( if(signUp.value) stringResource(R.string.registrarse) else stringResource(R.string.iniciar_sesion))
         }
@@ -130,11 +168,11 @@ fun RegisterView(
                 },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(vertical = 16.dp)
         ) {
             Text(
                 if(signUp.value) stringResource(R.string.ya_tienes_cuenta)
-            else stringResource(R.string.registrate)
+            else stringResource(R.string.registrate),
+                color = colorResource(id = R.color.third_hard)
             )
         }
 
