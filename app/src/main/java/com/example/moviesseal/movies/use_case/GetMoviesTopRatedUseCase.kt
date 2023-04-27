@@ -2,7 +2,6 @@ package com.example.moviesseal.movies.use_case
 
 import com.example.moviesseal.movies.api.MoviesDBApi
 import com.example.moviesseal.movies.models.MoviesResponse
-import java.util.*
 import javax.inject.Inject
 
 class GetMoviesTopRatedUseCase @Inject constructor(private val api: MoviesDBApi) { //para hacerlo directamente al crearlo

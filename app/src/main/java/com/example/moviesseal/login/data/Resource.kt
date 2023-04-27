@@ -4,7 +4,7 @@ package com.example.moviesseal.login.data
 sealed class Resource<T>(
     val currentUser: T? = null,
     val message: String? = null,
-    val loading: Boolean? = null
+    val loading: Boolean? = null,
 ) {
     class Success<T>(data: T? = null) : Resource<T>(currentUser = data)
     class Error<T>(data: T? = null, message: String? = null) : Resource<T>(data, message = message)

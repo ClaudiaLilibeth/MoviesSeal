@@ -16,6 +16,6 @@ data class Movie(
     @SerializedName("video") var video: Boolean = false,
     @SerializedName("vote_average") var vote_average: Double = 0.0,
     @SerializedName("vote_count") var vote_count: Int = 0,
-    @SerializedName("portada_id") var portada_id:Int = 0,
-    @SerializedName("poster_id") var poster_id:Int = 0,
-): Serializable
+    @SerializedName("portada_id") var portada_id: Int = 0,
+    @SerializedName("poster_id") var poster_id: Int = 0,
+) : Serializable

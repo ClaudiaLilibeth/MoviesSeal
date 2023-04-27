@@ -1,6 +1,7 @@
 package com.example.moviesseal.login
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.moviesseal.login.data.AuthRepository
 import com.example.moviesseal.login.data.Resource
 import com.google.firebase.auth.FirebaseUser
@@ -28,6 +29,7 @@ class AuthViewModel @Inject constructor(
     init {
         if (repository.currentUser != null) {
             _loginFlow.value = Resource.Success(repository.currentUser!!)
+
         }
     }
 

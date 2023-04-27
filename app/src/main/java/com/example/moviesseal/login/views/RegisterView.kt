@@ -1,6 +1,5 @@
 package com.example.moviesseal.login.views
 
-import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -27,16 +26,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.moviesseal.R
-import com.example.moviesseal.login.utils.CONSTANTS
+import com.example.moviesseal.commons.navigation.Destinations
+import com.example.moviesseal.commons.navigation.OnClickModel
 import com.example.moviesseal.login.AuthViewModel
 import com.example.moviesseal.login.data.Resource
-import com.example.moviesseal.movies.view.MoviesActivity
+import com.example.moviesseal.login.utils.CONSTANTS
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun RegisterView(
-    registerViewModel: AuthViewModel
+    onClick: (OnClickModel<Destinations>, name: String) -> Unit,
+    registerViewModel: AuthViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val signUp = rememberSaveable { mutableStateOf(true) }
@@ -50,6 +52,8 @@ fun RegisterView(
     val loginFlow = registerViewModel.loginFlow.collectAsState()
     val signUpFlow = registerViewModel.signupFlow.collectAsState()
 
+    Log.e("410538 view", registerViewModel.currentUser?.displayName ?: "NO NAME")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -57,20 +61,26 @@ fun RegisterView(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Image(painter = painterResource(id = R.drawable.logo_seal),
+        Image(
+            painter = painterResource(id = R.drawable.logo_seal),
             contentDescription = "logo",
             modifier = Modifier
                 .padding(top = 48.dp, bottom = 24.dp, end = 16.dp)
                 .size(200.dp)
         )
-        
-        if(signUp.value) {
+
+        if (signUp.value) {
             //Nombre
             OutlinedTextField(
                 value = name.value,
-                onValueChange = { if(it.length<= CONSTANTS.MAX_CHAR) name.value = it },
-                trailingIcon = { Icon(painter = painterResource(id = R.drawable.user), contentDescription = "icon",
-                    tint = colorResource(R.color.gray_soft))},
+                onValueChange = { if (it.length <= CONSTANTS.MAX_CHAR) name.value = it },
+                trailingIcon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.user),
+                        contentDescription = "icon",
+                        tint = colorResource(R.color.gray_soft)
+                    )
+                },
                 label = { Text(stringResource(R.string.nombre)) },
                 singleLine = true,
                 maxLines = 1,
@@ -80,9 +90,9 @@ fun RegisterView(
                     focusedBorderColor = colorResource(id = R.color.fourth_soft),
                     placeholderColor = colorResource(id = R.color.fourth_soft),
                     focusedLabelColor = colorResource(id = R.color.secondary_soft),
-                    ),
+                ),
                 keyboardActions = KeyboardActions(
-                    onDone = {keyboardController?.hide()}
+                    onDone = { keyboardController?.hide() }
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,11 +103,15 @@ fun RegisterView(
         // Email
         OutlinedTextField(
             value = email.value,
-            onValueChange = { if(it.length<= CONSTANTS.MAX_MAIL_CHAR) email.value = it },
+            onValueChange = { if (it.length <= CONSTANTS.MAX_MAIL_CHAR) email.value = it },
             label = { Text(stringResource(R.string.correo)) },
             singleLine = true,
-            trailingIcon = { Icon(painter = painterResource(id = R.drawable.email), contentDescription = "icon",
-                           tint = colorResource(R.color.gray_soft))},
+            trailingIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.email), contentDescription = "icon",
+                    tint = colorResource(R.color.gray_soft)
+                )
+            },
             maxLines = 1,
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 unfocusedBorderColor = colorResource(id = R.color.fourth_soft),
@@ -106,7 +120,10 @@ fun RegisterView(
                 placeholderColor = colorResource(id = R.color.fourth_soft),
                 focusedLabelColor = colorResource(id = R.color.secondary_soft),
             ),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
@@ -115,10 +132,13 @@ fun RegisterView(
         // Password
         OutlinedTextField(
             value = password.value,
-            onValueChange = { if(it.length<= CONSTANTS.MAX_CHAR) password.value = it },
+            onValueChange = { if (it.length <= CONSTANTS.MAX_CHAR) password.value = it },
             label = { Text(stringResource(R.string.contrasenia)) },
             visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,  imeAction = ImeAction.Done),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            ),
             singleLine = true,
             maxLines = 1,
             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -129,13 +149,19 @@ fun RegisterView(
                 focusedLabelColor = colorResource(id = R.color.secondary_soft),
             ),
             keyboardActions = KeyboardActions(
-                onDone = {keyboardController?.hide()}
+                onDone = { keyboardController?.hide() }
             ),
             trailingIcon = {
                 if (passwordVisible.value)
-                Icon(painterResource(id = com.google.android.material.R.drawable.design_ic_visibility), "visibility on")
-                else Icon(painterResource(id = com.google.android.material.R.drawable.design_ic_visibility_off), "visivility off")
-                IconButton(onClick = {passwordVisible.value = !passwordVisible.value}){
+                    Icon(
+                        painterResource(id = com.google.android.material.R.drawable.design_ic_visibility),
+                        "visibility on"
+                    )
+                else Icon(
+                    painterResource(id = com.google.android.material.R.drawable.design_ic_visibility_off),
+                    "visivility off"
+                )
+                IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
                 }
             },
             modifier = Modifier
@@ -146,32 +172,33 @@ fun RegisterView(
         // Sign up - register
         Button(
             onClick = {
-                if(signUp.value)
+                if (signUp.value)
                     registerViewModel.signupUser(name.value, email.value, password.value)
                 else
                     registerViewModel.loginUser(email.value, password.value)
-                      },
+            },
             modifier = Modifier
                 .padding(top = 8.dp),
             shape = RoundedCornerShape(50),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = R.color.secondary_soft),
-                contentColor = Color.White)
+                contentColor = Color.White
+            )
         ) {
-            Text( if(signUp.value) stringResource(R.string.registrarse) else stringResource(R.string.iniciar_sesion))
+            Text(if (signUp.value) stringResource(R.string.registrarse) else stringResource(R.string.iniciar_sesion))
         }
 
         // Log in - iniciar sesiòn
         TextButton(
-           onClick = {
-               signUp.value = !signUp.value
-                },
+            onClick = {
+                signUp.value = !signUp.value
+            },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
             Text(
-                if(signUp.value) stringResource(R.string.ya_tienes_cuenta)
-            else stringResource(R.string.registrate),
+                if (signUp.value) stringResource(R.string.ya_tienes_cuenta)
+                else stringResource(R.string.registrate),
                 color = colorResource(id = R.color.third_hard)
             )
         }
@@ -179,18 +206,22 @@ fun RegisterView(
         loginFlow.value?.let {
             when (it) {
                 is Resource.Error -> {
-                   Log.e("ERROR", "ERROR EN INICIO DE SESIÒN")
+                    Log.e("ERROR", "ERROR EN INICIO DE SESIÒN")
                     registerViewModel.logout()
                 }
                 is Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context, stringResource(R.string.inicio_sesion_correcta), Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, MoviesActivity::class.java).apply {
-                        putExtra(CONSTANTS.NAME, registerViewModel.currentUser?.displayName)
-                    }
-                    context.startActivity(intent)
+                    Toast.makeText(
+                        context,
+                        stringResource(R.string.inicio_sesion_correcta),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onClick.invoke(
+                        OnClickModel.Navigation(Destinations.MOVIES),
+                        registerViewModel.currentUser?.displayName ?: ""
+                    )
                 }
             }
         }
@@ -199,12 +230,19 @@ fun RegisterView(
             when (it) {
                 is Resource.Error -> {
                     Log.e("ERROR", "ERROR EN REGISTRO")
-                    val message = it.message?: ""
-                    if(message.contains(CONSTANTS.MAIL_ALREADY_IN_USE)){
-                        Toast.makeText(context, stringResource(R.string.correo_ya_registrado), Toast.LENGTH_SHORT).show()
-                    }
-                    else if (message.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
-                        Toast.makeText(context, stringResource(R.string.correo_mal_escrito), Toast.LENGTH_SHORT).show()
+                    val message = it.message ?: ""
+                    if (message.contains(CONSTANTS.MAIL_ALREADY_IN_USE)) {
+                        Toast.makeText(
+                            context,
+                            stringResource(R.string.correo_ya_registrado),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else if (message.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
+                        Toast.makeText(
+                            context,
+                            stringResource(R.string.correo_mal_escrito),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     registerViewModel.logout()
                 }
@@ -212,11 +250,15 @@ fun RegisterView(
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
                 is Resource.Success -> {
-                    Toast.makeText(context, stringResource(R.string.registro_correcto), Toast.LENGTH_SHORT).show()
-                    val intent = Intent(context, MoviesActivity::class.java).apply {
-                        putExtra(CONSTANTS.NAME, registerViewModel.currentUser?.displayName)
-                    }
-                    context.startActivity(intent)
+                    Toast.makeText(
+                        context,
+                        stringResource(R.string.registro_correcto),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onClick.invoke(
+                        OnClickModel.Navigation(Destinations.MOVIES),
+                        registerViewModel.currentUser?.displayName ?: ""
+                    )
                 }
             }
         }

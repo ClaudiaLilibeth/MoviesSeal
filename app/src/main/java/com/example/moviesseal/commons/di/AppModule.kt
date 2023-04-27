@@ -1,7 +1,7 @@
-package com.example.moviesseal.di
+package com.example.moviesseal.commons.di
 
 import c.Constants
-import com.example.moviesseal.interceptor.InterceptorMoviesDB
+import com.example.moviesseal.commons.interceptor.InterceptorMoviesDB
 import com.example.moviesseal.login.data.AuthRepository
 import com.example.moviesseal.login.data.AuthRepositoryImpl
 import com.example.moviesseal.movies.api.MoviesDBApi
@@ -25,7 +25,8 @@ class AppModule {
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth) : AuthRepository = AuthRepositoryImpl(firebaseAuth)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository =
+        AuthRepositoryImpl(firebaseAuth)
 
     @Provides
     @Singleton
@@ -37,7 +38,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit():Retrofit.Builder{
+    fun provideRetrofit(): Retrofit.Builder {
         val client = OkHttpClient().newBuilder()
             .addInterceptor(InterceptorMoviesDB()).build()
         return Retrofit.Builder()

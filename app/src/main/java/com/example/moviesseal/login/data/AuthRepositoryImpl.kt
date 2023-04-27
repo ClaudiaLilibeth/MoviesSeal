@@ -9,8 +9,8 @@ import dagger.hilt.android.scopes.ViewModelScoped
 
 //#firebase 3 events as suspend functions
 @ViewModelScoped
-class AuthRepositoryImpl (
-    private val firebaseAuth: FirebaseAuth
+class AuthRepositoryImpl(
+    private val firebaseAuth: FirebaseAuth,
 ) : AuthRepository {
 
     override val currentUser: FirebaseUser?
@@ -29,20 +29,25 @@ class AuthRepositoryImpl (
     }
 
     //REGISTRARSE
-    override suspend fun signup(name: String, email: String, password: String): Resource<FirebaseUser> {
+    override suspend fun signup(
+        name: String,
+        email: String,
+        password: String,
+    ): Resource<FirebaseUser> {
         return try {
             val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            result.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
+            result.user?.updateProfile(
+                UserProfileChangeRequest.Builder().setDisplayName(name).build()
+            )?.await()
             return Resource.Success(result.user!!)
         } catch (e: Exception) {
-            if(e.message!!.contains(CONSTANTS.MAIL_ALREADY_IN_USE)) {
+            if (e.message!!.contains(CONSTANTS.MAIL_ALREADY_IN_USE)) {
                 return Resource.Error(message = CONSTANTS.MAIL_ALREADY_IN_USE)
-            }
-            else if(e.message!!.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
-                return  Resource.Error(message = CONSTANTS.MAIL_BAD_FORMAT)
+            } else if (e.message!!.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
+                return Resource.Error(message = CONSTANTS.MAIL_BAD_FORMAT)
             }
             e.printStackTrace()
-            return  Resource.Error()
+            return Resource.Error()
         }
     }
 

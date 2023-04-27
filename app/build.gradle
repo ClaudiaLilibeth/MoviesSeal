@@ -61,7 +61,7 @@ dependencies {
     implementation 'androidx.compose.material:material:1.2.0'
     implementation "androidx.fragment:fragment-ktx:1.5.2"
 
-    // Lifecycle components
+    //LIFECYCLE
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
@@ -74,6 +74,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.4.0'
     kapt 'com.google.dagger:hilt-compiler:2.44'
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
 
     //FIREBASE
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
@@ -84,8 +86,17 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.0'
 
-    //NavigationCompose
+    //COMPOSE
     def nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    //ROOM
+    def room_version = "2.5.0"
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-rxjava2:$room_version")
+    implementation("androidx.room:room-rxjava3:$room_version")
+    implementation("androidx.room:room-guava:$room_version")
 }

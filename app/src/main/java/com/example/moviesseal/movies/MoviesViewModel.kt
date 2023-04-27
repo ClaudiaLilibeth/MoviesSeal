@@ -1,7 +1,8 @@
 package com.example.moviesseal.movies
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.moviesseal.movies.models.Movie
 import com.example.moviesseal.movies.use_case.GetMoviesLatestUseCase
 import com.example.moviesseal.movies.use_case.GetMoviesNowPlayingUseCase
@@ -19,9 +20,13 @@ class MoviesViewModel @Inject constructor(
     private val moviesLastUseCase: GetMoviesLatestUseCase,
     private val moviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
     private val moviesTopRatedUseCase: GetMoviesTopRatedUseCase,
-): ViewModel() {
+) : ViewModel() {
     private val _moviesNowPlaying = MutableStateFlow(ArrayList<Movie>())
     val moviesNowPlaying: StateFlow<ArrayList<Movie>> get() = _moviesNowPlaying
+
+    private val _selectedMovie = mutableStateOf(Movie())
+    val selectedMovie: MutableState<Movie> get() = _selectedMovie
+
 
     private val _moviesTopRated = MutableStateFlow(ArrayList<Movie>())
     val moviesTopRated: StateFlow<ArrayList<Movie>> get() = _moviesTopRated
@@ -35,5 +40,9 @@ class MoviesViewModel @Inject constructor(
             _moviesTopRated.value = moviesTopRatedUseCase().results
             _moviesLast.value = moviesLastUseCase()
         }
+    }
+
+    fun setSelectedMovie(movie: Movie) {
+        _selectedMovie.value = movie
     }
 }
