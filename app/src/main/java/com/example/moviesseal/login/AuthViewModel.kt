@@ -2,8 +2,8 @@ package com.example.moviesseal.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviesseal.login.data.AuthRepository
-import com.example.moviesseal.login.data.Resource
+import com.example.moviesseal.remote.auth.data.AuthRepository
+import com.example.moviesseal.remote.auth.data.Resource
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

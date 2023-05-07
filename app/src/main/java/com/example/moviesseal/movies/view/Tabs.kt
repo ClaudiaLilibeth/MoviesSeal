@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviesseal.R
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.movies.models.Movie
+import com.example.moviesseal.remote.movies.models.Movie
 
 @Composable
 fun Tabs(moviesViewModel: MoviesViewModel, onClick: (Movie) -> Unit) {

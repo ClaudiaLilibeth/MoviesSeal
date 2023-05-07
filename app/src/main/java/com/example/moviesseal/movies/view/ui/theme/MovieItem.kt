@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import c.Constants
 import coil.compose.AsyncImage
 import com.example.moviesseal.R
-import com.example.moviesseal.movies.models.Movie
+import com.example.moviesseal.remote.movies.models.Movie
 
 @Composable
 fun MovieItem(movieItem: Movie, onClick: (Movie) -> Unit) {

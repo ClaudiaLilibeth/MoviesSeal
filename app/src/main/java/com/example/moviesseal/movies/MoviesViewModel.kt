@@ -1,17 +1,17 @@
 package com.example.moviesseal.movies
 
 import androidx.lifecycle.ViewModel
-import com.example.moviesseal.genres.entities.GenreEntity
-import com.example.moviesseal.genres.entities.GenresAndMoviesCross
-import com.example.moviesseal.genres.repository.GenreRepository
-import com.example.moviesseal.login.data.AuthRepository
-import com.example.moviesseal.movies.models.Movie
-import com.example.moviesseal.movies.models.getGenresIds
-import com.example.moviesseal.movies.models.toEntity
-import com.example.moviesseal.movies.use_case.GetGenresUseCase
-import com.example.moviesseal.movies.use_case.GetMoviesLatestUseCase
-import com.example.moviesseal.movies.use_case.GetMoviesNowPlayingUseCase
-import com.example.moviesseal.movies.use_case.GetMoviesTopRatedUseCase
+import com.example.local.entities.GenreEntity
+import com.example.local.entities.GenresAndMoviesCross
+import com.example.local.repository.GenreRepository
+import com.example.moviesseal.remote.auth.data.AuthRepository
+import com.example.moviesseal.remote.movies.models.Movie
+import com.example.moviesseal.remote.movies.models.getGenresIds
+import com.example.moviesseal.remote.movies.models.toEntity
+import com.example.moviesseal.remote.movies.use_case.GetGenresUseCase
+import com.example.moviesseal.remote.movies.use_case.GetMoviesLatestUseCase
+import com.example.moviesseal.remote.movies.use_case.GetMoviesNowPlayingUseCase
+import com.example.moviesseal.remote.movies.use_case.GetMoviesTopRatedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,7 @@ class MoviesViewModel @Inject constructor(
     private val moviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
     private val moviesTopRatedUseCase: GetMoviesTopRatedUseCase,
     private val genresUseCase: GetGenresUseCase,
-    private val genreRepository: GenreRepository,
+    private val genreRepository: com.example.local.repository.GenreRepository,
     private val repository: AuthRepository,
 ) : ViewModel() {
     private val _moviesNowPlaying = MutableStateFlow(ArrayList<Movie>())
@@ -46,7 +46,7 @@ class MoviesViewModel @Inject constructor(
             _moviesLast.value = moviesLastUseCase()
 
             genresUseCase().genresList.map {
-                GenreEntity(idGenre = it.id, name = it.name)
+                com.example.local.entities.GenreEntity(idGenre = it.id, name = it.name)
             }.forEach {
                 genreRepository.insertGenre(it)
             }
@@ -67,7 +67,7 @@ class MoviesViewModel @Inject constructor(
 
             //INSERT MOVIES GENRES
             val listGenresMovie = movie.getGenresIds().map { idGenre ->
-                GenresAndMoviesCross(movie.id, idGenre)
+                com.example.local.entities.GenresAndMoviesCross(movie.id, idGenre)
             }
             genreRepository.insertMoviesToGenre(
                 listGenresMovie

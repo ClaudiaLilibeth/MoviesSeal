@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.moviesseal.login.views.RegisterView
+import com.example.moviesseal.login.RegisterView
 import com.example.moviesseal.movie.MovieView
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.movies.models.Movie
+import com.example.moviesseal.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.MoviesView
 
 @Composable

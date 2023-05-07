@@ -18,3 +18,4 @@
 
 rootProject.name = "MoviesSeal"
 include ':app'
+    include ':local'

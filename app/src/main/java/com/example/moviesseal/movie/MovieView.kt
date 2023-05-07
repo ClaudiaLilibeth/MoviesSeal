@@ -24,7 +24,7 @@ import com.example.moviesseal.R
 import com.example.moviesseal.commons.navigation.Destinations
 import com.example.moviesseal.commons.navigation.OnClickModel
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.movies.models.Movie
+import com.example.moviesseal.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.ui.theme.MovieItem
 
 @Composable
