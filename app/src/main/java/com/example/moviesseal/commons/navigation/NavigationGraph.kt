@@ -1,21 +1,23 @@
 package com.example.moviesseal.commons.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.moviesseal.login.AuthViewModel
 import com.example.moviesseal.login.views.RegisterView
 import com.example.moviesseal.movie.MovieView
+import com.example.moviesseal.movies.MoviesViewModel
+import com.example.moviesseal.movies.models.Movie
 import com.example.moviesseal.movies.view.MoviesView
 
 @Composable
 fun NavigationGraph(
+    viewModel: MoviesViewModel,
     navController: NavHostController,
-    authViewModel: AuthViewModel = hiltViewModel(),
 ) {
     var userName = ""
+    var movieSelected = Movie()
+
     val onClick: (OnClickModel<Destinations>, name: String) -> Unit = { OnClickModel, name ->
         when (OnClickModel) {
             is OnClickModel.Navigation -> {
@@ -25,16 +27,37 @@ fun NavigationGraph(
         }
     }
 
+    val onClickMovie: (OnClickModel<Destinations>, name: String, movie: Movie) -> Unit =
+        { OnClickModel, name, movie ->
+            when (OnClickModel) {
+                is OnClickModel.Navigation -> {
+                    userName = name
+                    movieSelected = movie
+                    viewModel.getGenfromMov(movie.id)
+                    navController.navigate(OnClickModel.destination.name)
+                }
+            }
+        }
+
     NavHost(navController = navController, startDestination = Destinations.LOGIN.name) {
         composable(Destinations.LOGIN.name) {
-            authViewModel.logout()
             RegisterView(onClick)
         }
         composable(Destinations.MOVIES.name) {
-            MoviesView(onClick, userName = userName)
+            MoviesView(
+                onClickMovies = onClickMovie,
+                onClick = onClick,
+                userName = userName,
+                viewModel
+            )
         }
         composable(Destinations.MOVIE.name) {
-            MovieView(onClick, userName = userName)
+            MovieView(
+                onClick,
+                userName = userName,
+                movie = movieSelected,
+                moviesViewModel = viewModel
+            )
         }
     }
 
@@ -48,8 +71,6 @@ enum class Destinations(val destination: String) {
     LOGIN("LOGIN"),
     MOVIES("MOVIES"),
     MOVIE("MOVIE"),
-    MOVIE_DETAIL("MOVIE_DETAIL"),
-    GENRES("GENRES")
 }
 
 

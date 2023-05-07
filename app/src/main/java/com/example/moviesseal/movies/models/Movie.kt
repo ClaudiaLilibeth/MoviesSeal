@@ -1,5 +1,6 @@
 package com.example.moviesseal.movies.models
 
+import com.example.moviesseal.genres.entities.MovieEntity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -19,3 +20,9 @@ data class Movie(
     @SerializedName("portada_id") var portada_id: Int = 0,
     @SerializedName("poster_id") var poster_id: Int = 0,
 ) : Serializable
+
+fun Movie.toEntity(): MovieEntity {
+    return MovieEntity(this.id, this.title)
+}
+
+fun Movie.getGenresIds() = this.genre_ids

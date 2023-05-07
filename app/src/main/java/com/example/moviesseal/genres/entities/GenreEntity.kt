@@ -1,0 +1,10 @@
+package com.example.moviesseal.genres.entities
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class GenreEntity(
+    @PrimaryKey val idGenre: Int,
+    val name: String,
+)

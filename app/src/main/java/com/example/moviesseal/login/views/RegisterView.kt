@@ -52,8 +52,6 @@ fun RegisterView(
     val loginFlow = registerViewModel.loginFlow.collectAsState()
     val signUpFlow = registerViewModel.signupFlow.collectAsState()
 
-    Log.e("410538 view", registerViewModel.currentUser?.displayName ?: "NO NAME")
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -220,7 +218,7 @@ fun RegisterView(
                     ).show()
                     onClick.invoke(
                         OnClickModel.Navigation(Destinations.MOVIES),
-                        registerViewModel.currentUser?.displayName ?: ""
+                        registerViewModel.currentUser?.displayName ?: "",
                     )
                 }
             }

@@ -9,7 +9,7 @@ import okhttp3.Response
 class InterceptorMoviesDB : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request: Request = chain.request()
-        val url: HttpUrl = request.url().newBuilder()
+        val url: HttpUrl = request.url.newBuilder()
             .addQueryParameter("api_key", Constants.API_KEY)
             .addQueryParameter("language", "es-ES")
             .build()

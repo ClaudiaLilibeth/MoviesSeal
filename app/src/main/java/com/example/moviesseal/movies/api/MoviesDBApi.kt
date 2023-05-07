@@ -1,5 +1,6 @@
 package com.example.moviesseal.movies.api
 
+import com.example.moviesseal.movies.models.GenreListResponse
 import com.example.moviesseal.movies.models.Movie
 import com.example.moviesseal.movies.models.MoviesResponse
 import retrofit2.http.GET
@@ -15,5 +16,7 @@ interface MoviesDBApi {
     @GET("movie/top_rated")
     suspend fun getMoviesTopRated(@Query("page") page: Int): MoviesResponse
 
+    @GET("genre/movie/list")
+    suspend fun getGenreList(): GenreListResponse
 
 }

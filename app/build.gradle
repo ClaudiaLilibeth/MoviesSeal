@@ -76,7 +76,6 @@ dependencies {
     kapt 'com.google.dagger:hilt-compiler:2.44'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
-
     //FIREBASE
     implementation platform('com.google.firebase:firebase-bom:31.2.3')
     implementation 'com.google.firebase:firebase-auth-ktx'
@@ -90,6 +89,9 @@ dependencies {
     def nav_version = "2.5.3"
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    //COIL
+    implementation("io.coil-kt:coil-compose:2.3.0")
+
     //ROOM
     def room_version = "2.5.0"
     implementation("androidx.room:room-runtime:$room_version")
@@ -99,4 +101,8 @@ dependencies {
     implementation("androidx.room:room-rxjava2:$room_version")
     implementation("androidx.room:room-rxjava3:$room_version")
     implementation("androidx.room:room-guava:$room_version")
+
+    //RXJAVA
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 }
