@@ -30,8 +30,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.moviesseal.R
 import com.example.moviesseal.commons.navigation.Destinations
 import com.example.moviesseal.commons.navigation.OnClickModel
-import com.example.moviesseal.remote.auth.data.Resource
-import com.example.moviesseal.remote.auth.utils.CONSTANTS
+import com.example.remote.auth.data.Resource
+import com.example.remote.auth.utils.CONSTANTS
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -70,7 +70,7 @@ fun RegisterView(
             //Nombre
             OutlinedTextField(
                 value = name.value,
-                onValueChange = { if (it.length <= CONSTANTS.MAX_CHAR) name.value = it },
+                onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) name.value = it },
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.user),
@@ -100,7 +100,7 @@ fun RegisterView(
         // Email
         OutlinedTextField(
             value = email.value,
-            onValueChange = { if (it.length <= CONSTANTS.MAX_MAIL_CHAR) email.value = it },
+            onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_MAIL_CHAR) email.value = it },
             label = { Text(stringResource(R.string.correo)) },
             singleLine = true,
             trailingIcon = {
@@ -129,7 +129,7 @@ fun RegisterView(
         // Password
         OutlinedTextField(
             value = password.value,
-            onValueChange = { if (it.length <= CONSTANTS.MAX_CHAR) password.value = it },
+            onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) password.value = it },
             label = { Text(stringResource(R.string.contrasenia)) },
             visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
@@ -202,14 +202,14 @@ fun RegisterView(
 
         loginFlow.value?.let {
             when (it) {
-                is Resource.Error -> {
+                is com.example.remote.auth.data.Resource.Error -> {
                     Log.e("ERROR", "ERROR EN INICIO DE SESIÒN")
                     registerViewModel.logout()
                 }
-                is Resource.Loading -> {
+                is com.example.remote.auth.data.Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
-                is Resource.Success -> {
+                is com.example.remote.auth.data.Resource.Success -> {
                     Toast.makeText(
                         context,
                         stringResource(R.string.inicio_sesion_correcta),
@@ -225,16 +225,16 @@ fun RegisterView(
 
         signUpFlow.value?.let {
             when (it) {
-                is Resource.Error -> {
+                is com.example.remote.auth.data.Resource.Error -> {
                     Log.e("ERROR", "ERROR EN REGISTRO")
                     val message = it.message ?: ""
-                    if (message.contains(CONSTANTS.MAIL_ALREADY_IN_USE)) {
+                    if (message.contains(com.example.remote.auth.utils.CONSTANTS.MAIL_ALREADY_IN_USE)) {
                         Toast.makeText(
                             context,
                             stringResource(R.string.correo_ya_registrado),
                             Toast.LENGTH_SHORT
                         ).show()
-                    } else if (message.contains(CONSTANTS.MAIL_BAD_FORMAT)) {
+                    } else if (message.contains(com.example.remote.auth.utils.CONSTANTS.MAIL_BAD_FORMAT)) {
                         Toast.makeText(
                             context,
                             stringResource(R.string.correo_mal_escrito),
@@ -243,10 +243,10 @@ fun RegisterView(
                     }
                     registerViewModel.logout()
                 }
-                is Resource.Loading -> {
+                is com.example.remote.auth.data.Resource.Loading -> {
                     CircularProgressIndicator(modifier = Modifier.size(40.dp))
                 }
-                is Resource.Success -> {
+                is com.example.remote.auth.data.Resource.Success -> {
                     Toast.makeText(
                         context,
                         stringResource(R.string.registro_correcto),

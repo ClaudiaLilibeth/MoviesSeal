@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.moviesseal.login.RegisterView
 import com.example.moviesseal.movie.MovieView
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.remote.movies.models.Movie
+import com.example.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.MoviesView
 
 @Composable
@@ -16,7 +16,7 @@ fun NavigationGraph(
     navController: NavHostController,
 ) {
     var userName = ""
-    var movieSelected = Movie()
+    var movieSelected = com.example.remote.movies.models.Movie()
 
     val onClick: (OnClickModel<Destinations>, name: String) -> Unit = { OnClickModel, name ->
         when (OnClickModel) {
@@ -27,7 +27,7 @@ fun NavigationGraph(
         }
     }
 
-    val onClickMovie: (OnClickModel<Destinations>, name: String, movie: Movie) -> Unit =
+    val onClickMovie: (OnClickModel<Destinations>, name: String, movie: com.example.remote.movies.models.Movie) -> Unit =
         { OnClickModel, name, movie ->
             when (OnClickModel) {
                 is OnClickModel.Navigation -> {

@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviesseal.R
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.remote.movies.models.Movie
+import com.example.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.ui.theme.MovieItem
 
 @Composable
 @UiComposable
-fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (Movie) -> Unit) {
+fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
     val moviesNow = moviesViewModel.moviesNowPlaying.collectAsState()
     val offset = Offset(5.0f, 10.0f)
 

@@ -24,10 +24,10 @@ import androidx.compose.ui.unit.sp
 import c.Constants
 import coil.compose.AsyncImage
 import com.example.moviesseal.R
-import com.example.moviesseal.remote.movies.models.Movie
+import com.example.remote.movies.models.Movie
 
 @Composable
-fun MovieItem(movieItem: Movie, onClick: (Movie) -> Unit) {
+fun MovieItem(movieItem: com.example.remote.movies.models.Movie, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
     val offset = Offset(3.0f, 5.0f)
     Row(modifier = Modifier.padding(16.dp)) {
         Column(modifier = Modifier.size(width = 200.dp, height = 200.dp)) {

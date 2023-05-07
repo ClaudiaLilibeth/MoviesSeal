@@ -1,10 +1,10 @@
 package com.example.moviesseal.commons
 
 import c.Constants
-import com.example.moviesseal.remote.auth.data.AuthRepository
-import com.example.moviesseal.remote.auth.data.AuthRepositoryImpl
-import com.example.moviesseal.remote.interceptor.InterceptorMoviesDB
-import com.example.moviesseal.remote.movies.api.MoviesDBApi
+import com.example.remote.auth.data.AuthRepository
+import com.example.remote.auth.data.AuthRepositoryImpl
+import com.example.remote.interceptor.InterceptorMoviesDB
+import com.example.remote.movies.api.MoviesDBApi
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -24,22 +24,22 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository =
-        AuthRepositoryImpl(firebaseAuth)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): com.example.remote.auth.data.AuthRepository =
+        com.example.remote.auth.data.AuthRepositoryImpl(firebaseAuth)
 
     @Provides
     @Singleton
-    fun provideMoviesDBApi(builder: Retrofit.Builder): MoviesDBApi {
+    fun provideMoviesDBApi(builder: Retrofit.Builder): com.example.remote.movies.api.MoviesDBApi {
         return builder
             .build()
-            .create(MoviesDBApi::class.java)
+            .create(com.example.remote.movies.api.MoviesDBApi::class.java)
     }
 
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit.Builder {
         val client = OkHttpClient().newBuilder()
-            .addInterceptor(InterceptorMoviesDB()).build()
+            .addInterceptor(com.example.remote.interceptor.InterceptorMoviesDB()).build()
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(client)

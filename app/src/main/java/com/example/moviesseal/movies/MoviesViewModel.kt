@@ -4,14 +4,14 @@ import androidx.lifecycle.ViewModel
 import com.example.local.entities.GenreEntity
 import com.example.local.entities.GenresAndMoviesCross
 import com.example.local.repository.GenreRepository
-import com.example.moviesseal.remote.auth.data.AuthRepository
-import com.example.moviesseal.remote.movies.models.Movie
-import com.example.moviesseal.remote.movies.models.getGenresIds
-import com.example.moviesseal.remote.movies.models.toEntity
-import com.example.moviesseal.remote.movies.use_case.GetGenresUseCase
-import com.example.moviesseal.remote.movies.use_case.GetMoviesLatestUseCase
-import com.example.moviesseal.remote.movies.use_case.GetMoviesNowPlayingUseCase
-import com.example.moviesseal.remote.movies.use_case.GetMoviesTopRatedUseCase
+import com.example.remote.auth.data.AuthRepository
+import com.example.remote.movies.models.Movie
+import com.example.remote.movies.models.getGenresIds
+import com.example.remote.movies.models.toEntity
+import com.example.remote.movies.use_case.GetGenresUseCase
+import com.example.remote.movies.use_case.GetMoviesLatestUseCase
+import com.example.remote.movies.use_case.GetMoviesNowPlayingUseCase
+import com.example.remote.movies.use_case.GetMoviesTopRatedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,21 +20,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
-    private val moviesLastUseCase: GetMoviesLatestUseCase,
-    private val moviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
-    private val moviesTopRatedUseCase: GetMoviesTopRatedUseCase,
-    private val genresUseCase: GetGenresUseCase,
+    private val moviesLastUseCase: com.example.remote.movies.use_case.GetMoviesLatestUseCase,
+    private val moviesNowPlayingUseCase: com.example.remote.movies.use_case.GetMoviesNowPlayingUseCase,
+    private val moviesTopRatedUseCase: com.example.remote.movies.use_case.GetMoviesTopRatedUseCase,
+    private val genresUseCase: com.example.remote.movies.use_case.GetGenresUseCase,
     private val genreRepository: com.example.local.repository.GenreRepository,
-    private val repository: AuthRepository,
+    private val repository: com.example.remote.auth.data.AuthRepository,
 ) : ViewModel() {
-    private val _moviesNowPlaying = MutableStateFlow(ArrayList<Movie>())
-    val moviesNowPlaying: StateFlow<ArrayList<Movie>> get() = _moviesNowPlaying
+    private val _moviesNowPlaying = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
+    val moviesNowPlaying: StateFlow<ArrayList<com.example.remote.movies.models.Movie>> get() = _moviesNowPlaying
 
-    private val _moviesTopRated = MutableStateFlow(ArrayList<Movie>())
-    val moviesTopRated: StateFlow<ArrayList<Movie>> get() = _moviesTopRated
+    private val _moviesTopRated = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
+    val moviesTopRated: StateFlow<ArrayList<com.example.remote.movies.models.Movie>> get() = _moviesTopRated
 
-    private val _moviesLast = MutableStateFlow(Movie())
-    val moviesLast: StateFlow<Movie> get() = _moviesLast
+    private val _moviesLast = MutableStateFlow(com.example.remote.movies.models.Movie())
+    val moviesLast: StateFlow<com.example.remote.movies.models.Movie> get() = _moviesLast
 
     private val _genresDetail = MutableStateFlow(ArrayList<String>())
     val genresDetaill: StateFlow<ArrayList<String>> get() = _genresDetail
@@ -57,7 +57,7 @@ class MoviesViewModel @Inject constructor(
         repository.logout()
     }
 
-    fun insertMovieAndGenre(movie: Movie) {
+    fun insertMovieAndGenre(movie: com.example.remote.movies.models.Movie) {
         CoroutineScope(Dispatchers.IO).launch {
             genreRepository.insertMovie(
                 arrayListOf(

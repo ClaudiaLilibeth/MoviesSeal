@@ -20,13 +20,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviesseal.R
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.remote.movies.models.Movie
+import com.example.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.ui.theme.MovieItem
 
 
 @Composable
 @UiComposable
-fun LastMovie(moviesViewModel: MoviesViewModel, onClick: (Movie) -> Unit) {
+fun LastMovie(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
     val moviesLast = moviesViewModel.moviesLast.collectAsState()
     val offset = Offset(5.0f, 10.0f)
     Text(

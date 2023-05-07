@@ -19,11 +19,11 @@ import com.example.moviesseal.R
 import com.example.moviesseal.commons.navigation.Destinations
 import com.example.moviesseal.commons.navigation.OnClickModel
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.moviesseal.remote.movies.models.Movie
+import com.example.remote.movies.models.Movie
 
 @Composable
 fun MoviesView(
-    onClickMovies: (OnClickModel<Destinations>, name: String, movie: Movie) -> Unit,
+    onClickMovies: (OnClickModel<Destinations>, name: String, movie: com.example.remote.movies.models.Movie) -> Unit,
     onClick: (OnClickModel<Destinations>, name: String) -> Unit,
     userName: String,
     moviesViewModel: MoviesViewModel,
