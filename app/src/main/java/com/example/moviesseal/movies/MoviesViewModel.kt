@@ -1,11 +1,13 @@
 package com.example.moviesseal.movies
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.local.entities.GenreEntity
 import com.example.local.entities.GenresAndMoviesCross
 import com.example.local.repository.GenreRepository
 import com.example.remote.auth.data.AuthRepository
 import com.example.remote.movies.models.Movie
+import com.example.remote.movies.models.MoviesResponse
 import com.example.remote.movies.models.getGenresIds
 import com.example.remote.movies.models.toEntity
 import com.example.remote.movies.use_case.GetGenresUseCase
@@ -21,15 +23,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val moviesLastUseCase: com.example.remote.movies.use_case.GetMoviesLatestUseCase,
-    private val moviesNowPlayingUseCase: com.example.remote.movies.use_case.GetMoviesNowPlayingUseCase,
+    private val moviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
     private val moviesTopRatedUseCase: com.example.remote.movies.use_case.GetMoviesTopRatedUseCase,
     private val genresUseCase: com.example.remote.movies.use_case.GetGenresUseCase,
     private val genreRepository: com.example.local.repository.GenreRepository,
     private val repository: com.example.remote.auth.data.AuthRepository,
 ) : ViewModel() {
-    private val _moviesNowPlaying = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
-    val moviesNowPlaying: StateFlow<ArrayList<com.example.remote.movies.models.Movie>> get() = _moviesNowPlaying
-
+    //private val _moviesNowPlaying = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
+    val moviesNowPlaying: LiveData<MoviesResponse> by lazy {
+        moviesNowPlayingUseCase.getMoviesNowPlaying()
+    }
     private val _moviesTopRated = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
     val moviesTopRated: StateFlow<ArrayList<com.example.remote.movies.models.Movie>> get() = _moviesTopRated
 
@@ -41,7 +44,7 @@ class MoviesViewModel @Inject constructor(
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            _moviesNowPlaying.value = moviesNowPlayingUseCase().results
+            //_moviesNowPlaying.value = moviesNowPlayingUseCase.getMoviesNowPlaying().value.results
             _moviesTopRated.value = moviesTopRatedUseCase().results
             _moviesLast.value = moviesLastUseCase()
 

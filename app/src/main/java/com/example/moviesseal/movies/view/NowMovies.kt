@@ -5,6 +5,9 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
@@ -23,7 +26,8 @@ import com.example.moviesseal.movies.view.ui.theme.MovieItem
 @Composable
 @UiComposable
 fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
-    val moviesNow = moviesViewModel.moviesNowPlaying.collectAsState()
+
+    val moviesNow = moviesViewModel.moviesNowPlaying.observeAsState()
     val offset = Offset(5.0f, 10.0f)
 
     Text(
@@ -43,7 +47,7 @@ fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.mov
         color = colorResource(id = R.color.secondary_light),
     )
 
-    if (moviesNow.value.isEmpty()) {
+    if (moviesNow.value!!.results.isEmpty()) {
         Spacer(modifier = Modifier.padding(100.dp))
         CircularProgressIndicator(
             modifier = Modifier
@@ -51,7 +55,7 @@ fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.mov
                 .wrapContentSize(align = Alignment.Center)
         )
     } else {
-        moviesNow.value.forEach {
+        moviesNow.value!!.results.forEach {
             moviesViewModel.insertMovieAndGenre(it)
             MovieItem(movieItem = it, onClick)
         }
