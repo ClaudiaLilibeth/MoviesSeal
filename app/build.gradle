@@ -108,4 +108,26 @@ dependencies {
     //RXJAVA
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    //TESTING
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6"
+
+    testImplementation("androidx.room:room-testing:$room_version") //ROOM
+
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.44")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.44")// HILT
+
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
+    debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version" //RXJAVA
+
+    //
+    def mockkVersion= "1.8.13"
+    testImplementation "io.mockk:mockk:${mockkVersion}"
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+
+
+
 }
