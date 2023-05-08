@@ -30,8 +30,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.moviesseal.R
 import com.example.moviesseal.commons.navigation.Destinations
 import com.example.moviesseal.commons.navigation.OnClickModel
-import com.example.remote.auth.data.Resource
-import com.example.remote.auth.utils.CONSTANTS
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -70,7 +68,10 @@ fun RegisterView(
             //Nombre
             OutlinedTextField(
                 value = name.value,
-                onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) name.value = it },
+                onValueChange = {
+                    if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) name.value =
+                        it
+                },
                 trailingIcon = {
                     Icon(
                         painter = painterResource(id = R.drawable.user),
@@ -100,7 +101,10 @@ fun RegisterView(
         // Email
         OutlinedTextField(
             value = email.value,
-            onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_MAIL_CHAR) email.value = it },
+            onValueChange = {
+                if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_MAIL_CHAR) email.value =
+                    it
+            },
             label = { Text(stringResource(R.string.correo)) },
             singleLine = true,
             trailingIcon = {
@@ -129,7 +133,10 @@ fun RegisterView(
         // Password
         OutlinedTextField(
             value = password.value,
-            onValueChange = { if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) password.value = it },
+            onValueChange = {
+                if (it.length <= com.example.remote.auth.utils.CONSTANTS.MAX_CHAR) password.value =
+                    it
+            },
             label = { Text(stringResource(R.string.contrasenia)) },
             visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(

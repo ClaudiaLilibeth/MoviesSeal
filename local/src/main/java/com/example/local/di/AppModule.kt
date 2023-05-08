@@ -24,7 +24,6 @@ class AppModule {
         GenreRepository(dao)
 
 
-
     @Provides
     @Singleton
     fun provideGenresDao(db: DataBase): GenresDao {

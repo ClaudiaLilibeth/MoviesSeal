@@ -2,18 +2,10 @@ package com.example.moviesseal.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.local.entities.GenreEntity
-import com.example.local.entities.GenresAndMoviesCross
-import com.example.local.repository.GenreRepository
-import com.example.remote.auth.data.AuthRepository
-import com.example.remote.movies.models.Movie
 import com.example.remote.movies.models.MoviesResponse
 import com.example.remote.movies.models.getGenresIds
 import com.example.remote.movies.models.toEntity
-import com.example.remote.movies.use_case.GetGenresUseCase
-import com.example.remote.movies.use_case.GetMoviesLatestUseCase
 import com.example.remote.movies.use_case.GetMoviesNowPlayingUseCase
-import com.example.remote.movies.use_case.GetMoviesTopRatedUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,7 +25,8 @@ class MoviesViewModel @Inject constructor(
     val moviesNowPlaying: LiveData<MoviesResponse> by lazy {
         moviesNowPlayingUseCase.getMoviesNowPlaying()
     }
-    private val _moviesTopRated = MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
+    private val _moviesTopRated =
+        MutableStateFlow(ArrayList<com.example.remote.movies.models.Movie>())
     val moviesTopRated: StateFlow<ArrayList<com.example.remote.movies.models.Movie>> get() = _moviesTopRated
 
     private val _moviesLast = MutableStateFlow(com.example.remote.movies.models.Movie())

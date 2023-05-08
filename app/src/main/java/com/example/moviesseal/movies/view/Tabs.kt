@@ -13,10 +13,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviesseal.R
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.remote.movies.models.Movie
 
 @Composable
-fun Tabs(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
+fun Tabs(
+    moviesViewModel: MoviesViewModel,
+    onClick: (com.example.remote.movies.models.Movie) -> Unit,
+) {
     var tabIndex by remember { mutableStateOf(0) }
     val tabs = listOf("En cines", "Lo último", "Top")
 

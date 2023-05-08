@@ -4,10 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCompositionContext
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.UiComposable
@@ -20,12 +17,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.moviesseal.R
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.ui.theme.MovieItem
 
 @Composable
 @UiComposable
-fun NowMovies(moviesViewModel: MoviesViewModel, onClick: (com.example.remote.movies.models.Movie) -> Unit) {
+fun NowMovies(
+    moviesViewModel: MoviesViewModel,
+    onClick: (com.example.remote.movies.models.Movie) -> Unit,
+) {
 
     val moviesNow = moviesViewModel.moviesNowPlaying.observeAsState()
     val offset = Offset(5.0f, 10.0f)

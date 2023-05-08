@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import com.example.moviesseal.login.RegisterView
 import com.example.moviesseal.movie.MovieView
 import com.example.moviesseal.movies.MoviesViewModel
-import com.example.remote.movies.models.Movie
 import com.example.moviesseal.movies.view.MoviesView
 
 @Composable

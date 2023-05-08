@@ -7,13 +7,11 @@ import com.example.remote.movies.api.MoviesDBApi
 import com.example.remote.movies.models.MoviesResponse
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class MoviesDataSource @Inject constructor(
     private val api: MoviesDBApi,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
 ) {
     private val _networkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState> get() = _networkState
@@ -38,7 +36,7 @@ class MoviesDataSource @Inject constructor(
                     )
             )
         } catch (e: Exception) {
-            e.message?.let { message -> Log.e("HTTP_ERROR_CATCH", message)}
+            e.message?.let { message -> Log.e("HTTP_ERROR_CATCH", message) }
         }
     }
 }

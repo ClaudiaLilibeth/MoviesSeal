@@ -2,10 +2,7 @@ package com.example.moviesseal.commons
 
 import c.Constants
 import c.Constants.CONNECTION_TIMEOUT
-import com.example.remote.auth.data.AuthRepository
-import com.example.remote.auth.data.AuthRepositoryImpl
 import com.example.remote.interceptor.InterceptorMoviesDB
-import com.example.remote.movies.api.MoviesDBApi
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
@@ -45,7 +42,7 @@ class AppModule {
     @Singleton
     fun provideClient(
         interceptor: HttpLoggingInterceptor,
-        headerInterceptor: Interceptor
+        headerInterceptor: Interceptor,
     ): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(interceptor)

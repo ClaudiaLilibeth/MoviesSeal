@@ -2,8 +2,6 @@ package com.example.moviesseal.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.remote.auth.data.AuthRepository
-import com.example.remote.auth.data.Resource
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,10 +15,12 @@ class AuthViewModel @Inject constructor(
 ) : ViewModel() {
 
     //#firebase 4 flows to use firebase functions inside vm
-    private val _loginFlow = MutableStateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?>(null)
+    private val _loginFlow =
+        MutableStateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?>(null)
     val loginFlow: StateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?> = _loginFlow
 
-    private val _signupFlow = MutableStateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?>(null)
+    private val _signupFlow =
+        MutableStateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?>(null)
     val signupFlow: StateFlow<com.example.remote.auth.data.Resource<FirebaseUser>?> = _signupFlow
 
     val currentUser: FirebaseUser?
@@ -28,7 +28,8 @@ class AuthViewModel @Inject constructor(
 
     init {
         if (repository.currentUser != null) {
-            _loginFlow.value = com.example.remote.auth.data.Resource.Success(repository.currentUser!!)
+            _loginFlow.value =
+                com.example.remote.auth.data.Resource.Success(repository.currentUser!!)
 
         }
     }
