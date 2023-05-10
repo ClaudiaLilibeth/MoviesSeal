@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "870454459370",
+    "project_id": "seal-movies",
+    "storage_bucket": "seal-movies.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870454459370:android:311fb2f7df06d6408b9093",
+        "android_client_info": {
+          "package_name": "com.example.moviesseal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870454459370-oki36u2ktus5nsqu5gmvnrtlqoo0u2c4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moviesseal",
+            "certificate_hash": "49831f79d6586be4588a0087eeb6fbe7b0bcc4c8"
+          }
+        },
+        {
+          "client_id": "870454459370-2d6rpqvi1e9clf4gp1v4p1df71n8u095.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOwUH6643XKcLDCu9IzgoxRPaNCm2IMeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870454459370-2d6rpqvi1e9clf4gp1v4p1df71n8u095.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
