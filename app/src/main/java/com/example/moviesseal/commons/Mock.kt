@@ -17,8 +17,8 @@ object Mock{
         return GenreEntity(idGenre = 3, name = "Historico")
     }
 
-    fun createMoviesList(): List<MovieEntity>{
-        return  listOf<MovieEntity>(
+    fun createMoviesList(): ArrayList<MovieEntity>{
+        return  arrayListOf(
             MovieEntity(1, "El ataque de las focas VII"),
             MovieEntity(2, "Joaquín la capybara"),
             MovieEntity(3, "El pambazo asesino"))

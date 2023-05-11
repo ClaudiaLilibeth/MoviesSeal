@@ -38,6 +38,7 @@ android {
             useJUnitPlatform()
         }
     }
+    testOptions { unitTests.includeAndroidResources = true }
 }
 
 dependencies {
@@ -93,5 +94,7 @@ dependencies {
     //Google Thruth
     testImplementation "com.google.truth:truth:1.1.3"
 
+    //Arch Core
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
 
 }

@@ -60,14 +60,14 @@ class GenreRepositoryTest{
         val captureMovies = slot<List<MovieEntity>>()
         coEvery { mockGenresDao.insertMovie(capture(captureMovies))} just runs
 
-        sut.insertMovie(movies as ArrayList<MovieEntity>)
+        sut.insertMovie(movies)
 
         Truth.assertThat(movies).isEqualTo(captureMovies.captured)
         coVerify (atLeast = 1) {mockGenresDao.insertMovie(movies)}
     }
 
     @Test
-    suspend fun `insert genres and movies cross in dao`() = runTest {
+    fun `insert genres and movies cross in dao`() = runTest {
         val cross = Mock.createMovieGenreCross()
         val captureCross= slot < List<GenresAndMoviesCross>>()
 
