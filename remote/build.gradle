@@ -19,6 +19,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+
     buildTypes {
         release {
             minifyEnabled false
@@ -31,6 +32,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
     }
 }
 
@@ -74,11 +80,15 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version" //RXJAVA
 
     //
-    def mockkVersion = "1.8.13"
-    testImplementation "io.mockk:mockk:${mockkVersion}"
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
+    testImplementation 'junit:junit:4.13.2'// Required
+    //Roboelectric
+    testImplementation 'org.robolectric:robolectric:4.9'
+    //JUnit
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    //Mockk
+    testImplementation "io.mockk:mockk:1.13.4"
+    //Google Thruth
+    testImplementation "com.google.truth:truth:1.1.3"
 
 
 }

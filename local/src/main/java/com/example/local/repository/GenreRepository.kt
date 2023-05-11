@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class GenreRepository @Inject constructor(
     private val dao: GenresDao,
-) {
+){
     suspend fun insertGenre(genre: GenreEntity) {
         dao.insertGenre(genre)
     }
